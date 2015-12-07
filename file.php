@@ -9,6 +9,8 @@
 return array(
     "1" => "first",
     "2" => "two",
+    "3" => "three",
+    "4" => "four",
     "5" => "five",
     "6" => "six"
 );

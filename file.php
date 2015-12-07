@@ -8,5 +8,7 @@
 
 return array(
     "1" => "first",
-    "2" => "two"
+    "2" => "two",
+    "3" => "three",
+    "4" => "four"
 );

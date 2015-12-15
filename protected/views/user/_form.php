@@ -3,7 +3,10 @@
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'user-form',
-        'enableAjaxValidation' => false,
+        'enableClientValidation' => true,
+        'clientOptions' => array(
+            'validateOnSubmit' => true,
+        ),
     ));
     ?>
 
@@ -28,6 +31,14 @@
         <?php echo $form->passwordField($model, 'password', array('size' => 30, 'maxlength' => 30)); ?>
         <?php echo $form->error($model, 'password'); ?>
     </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'password_repeat'); ?>
+        <?php echo $form->passwordField($model, 'password_repeat', array('size' => 30, 'maxlength' => 30)); ?>
+        <?php echo $form->error($model, 'password_repeat'); ?>
+    </div>
+
+
 
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Зареєструватися' : 'Save'); ?>

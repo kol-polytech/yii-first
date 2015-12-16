@@ -44,18 +44,36 @@ class ArticleController extends Controller
 	public function actionCreate()
 	{
 		$model=new Article;
-
+                
 		
 
 		if(isset($_POST['Article']))
 		{
 			$model->attributes=$_POST['Article'];
+                        $model->user_id=1;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+		));
+	}
+        public function actionCreateComment()
+	{
+		$modelComment=new Comment;
+                
+		
+
+		if(isset($_POST['Comment']))
+		{
+			$modelComment->attributes=$_POST['Comment'];
+			if($modelComment->save())
+				$this->redirect(array('view','id'=>$modelComment->article_id));
+		}
+
+		$this->render('create',array(
+			'modelComment'=>$modelComment,
 		));
 	}
 
@@ -86,9 +104,16 @@ class ArticleController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        /*public function actionIndexComment()
+	{
+		$dataProvider=new CActiveDataProvider('Comment');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
 
 	
-	
+	*/
 	public function loadModel($id)
 	{
 		$model=Article::model()->findByPk($id);

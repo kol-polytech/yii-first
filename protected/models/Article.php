@@ -17,7 +17,7 @@ class Article extends CActiveRecord
 			array('title, content', 'required'),
 			array('title', 'length', 'max'=>255),
 			
-			array('id, title, content', 'safe', 'on'=>'search'),
+			array('id, user_id, title, content', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -34,6 +34,7 @@ class Article extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+                        'user_id' => 'USER_ID',
 			'title' => 'Title',
 			'content' => 'Content',
 		);
@@ -47,6 +48,7 @@ class Article extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+                $criteria->compare('user_id',$this->id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('content',$this->content,true);
 

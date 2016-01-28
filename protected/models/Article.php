@@ -22,15 +22,15 @@ class Article extends CActiveRecord
 	}
 
 	
-	public function relations()
-	{
-		
-		return array(
-		);
-	}
+	public function relations() {
 
-	
-	public function attributeLabels()
+        return array(
+            'author' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'comments' => array(self::MANY_MANY, 'Comment', 'article_id'),
+        );
+    }
+
+    public function attributeLabels()
 	{
 		return array(
 			'id' => 'ID',

@@ -35,6 +35,12 @@ class User extends CActiveRecord {
             'password_repeat' => 'Повторіть пароль',
         );
     }
+    
+    public function beforeSave() {
+        $pass = md5($this->password);
+        $this->password = $pass;
+        return true;
+    }
 
     public static function model($className = __CLASS__) {
         return parent::model($className);

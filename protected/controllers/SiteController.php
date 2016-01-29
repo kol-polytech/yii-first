@@ -71,6 +71,40 @@ class SiteController extends Controller
 		}
 		$this->render('contact',array('model'=>$model));
 	}
+        
+       public function actionPass()
+	{
+		$model=new PassForm;
+		if(isset($_POST['PassForm']))
+		{
+			$model->attributes=$_POST['PassForm'];
+			if($model->validate())
+			{
+                            
+                                $token = md5(time());
+                                $usermodel = User::model()->findByAttributes(array('email' => $model->email));
+                                $usermodel->token = $token;
+                                $usermodel->save(false);
+                                $link = $this->createAbsoluteUrl('user/confirm', array('id'=>$usermodel->id, 'token'=>$usermodel->token));
+                                
+                                $name='=?UTF-8?B?'.base64_encode($usermodel->username).'?=';
+                                $body = "Шоб змінити пароль перейдіть за цим посиланням: $link";
+				$frommail = Yii::app()->params['adminEmail'];
+				$subject='=?UTF-8?B?'.base64_encode('Відновлення паролю').'?=';
+				$headers="From: $name <{$frommail}>\r\n".
+					"Reply-To: {$frommail}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-Type: text/plain; charset=UTF-8";
+
+				mail($model->email,$subject,$body,$headers);
+				Yii::app()->user->setFlash('sendlink','Інструкція відправлена вам на пошту');
+				
+                                        $this->refresh();
+                                      //  echo "Hello";
+			}
+		}
+		$this->render('pass',array('model'=>$model));
+	}
 
 	/**
 	 * Displays the login page

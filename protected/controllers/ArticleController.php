@@ -33,15 +33,24 @@ class ArticleController extends Controller
 	}
 
 	
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
+	public function actionView($id) {
 
-	
-	public function actionCreate()
+        $modelComment = new Comment;
+
+        if (isset($_POST['Comment'])) {
+            $modelComment->attributes = $_POST['Comment'];
+            $modelComment->article_id=$id;
+            if ($modelComment->save())
+                $this->refresh();
+        }
+
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
+            'modelComment' => $modelComment,
+        ));
+    }
+
+    public function actionCreate()
 	{
 		$model=new Article;
                 
@@ -50,7 +59,7 @@ class ArticleController extends Controller
 		if(isset($_POST['Article']))
 		{
 			$model->attributes=$_POST['Article'];
-                        $model->user_id=1;
+                        $model->user_id = Yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

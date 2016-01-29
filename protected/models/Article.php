@@ -26,7 +26,7 @@ class Article extends CActiveRecord
 
         return array(
             'author' => array(self::BELONGS_TO, 'User', 'user_id'),
-            'comments' => array(self::MANY_MANY, 'Comment', 'article_id'),
+            'comments' => array(self::HAS_MANY, 'Comment', 'article_id', 'order' => 'id DESC'),
         );
     }
 

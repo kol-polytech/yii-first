@@ -27,8 +27,8 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, username, content', 'required'),
-			array('id', 'numerical', 'integerOnly'=>true),
+			array('article_id,username, content', 'required'),
+			array('article_id', 'numerical', 'integerOnly'=>true),
 			array('username', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -54,7 +54,7 @@ class Comment extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'article_id' => 'Article',
+			'article_id' => 'Article ID',
 			'username' => 'Username',
 			'content' => 'Content',
 		);

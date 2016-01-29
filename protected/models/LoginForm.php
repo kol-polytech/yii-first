@@ -11,6 +11,7 @@ class LoginForm extends CFormModel {
     public $password;
     public $rememberMe;
     private $_identity;
+    public $outpass;
 
     /**
      * Declares the validation rules.
@@ -36,6 +37,7 @@ class LoginForm extends CFormModel {
             'rememberMe' => 'Запам\'ятати мене',
             'username' => 'Логін',
             'password' => 'Пароль',
+            'outpass' => 'Забули пароль?'
         );
     }
 

@@ -43,8 +43,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 
     <div class="row">
 
-        <?php echo CHtml::link('Забули пароль?', '?r=site/pass'); ?>
-
+        <a href="<?php echo $this->createUrl('site/pass') ?>">Забули пароль</a>
     </div>
 
     <div class="row buttons">
